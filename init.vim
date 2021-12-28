@@ -10,6 +10,8 @@ call plug#begin("~/.vim/plugged")
  Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
+set number
+
 if (has("termguicolors"))
  set termguicolors
 endif
