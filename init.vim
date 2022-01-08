@@ -7,6 +7,7 @@ call plug#begin("~/.vim/plugged")
  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-cssmodules', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-angular',  'coc-git', 'coc-highlight', 'coc-omnisharp', 'coc-snippets' ]
  Plug 'leafgarland/typescript-vim'
  Plug 'github/copilot.vim'
+ Plug 'tpope/vim-fugitive'
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
  Plug 'ryanoasis/vim-devicons'
@@ -14,14 +15,58 @@ call plug#end()
 
 " Airline configuraiton
 let g:airline_theme='dracula'
+let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#coc#enabled = 1
+let airline#extensions#coc#error_symbol = 'E:'
+let airline#extensions#coc#warning_symbol = 'W:'
+let g:airline#extensions#coc#show_coc_status = 1
+let g:airline#extensions#fzf#enabled = 1
+let g:airline_powerline_fonts = 1
+
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.colnr = ':'
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ' :'
+  let g:airline_symbols.maxlinenr = ' | '
+  let g:airline_symbols.dirty='⚡'
 
 " General settings
-set number
+set number " Line numbers
 set mouse=a
+syntax enable
+set t_Co=256                            " Support 256 colors
+set tabstop=2                          " Insert 2 spaces for a tab
+set updatetime=300                      " Faster completion
+set timeoutlen=500                      " By default timeoutlen is 1000 ms
+set splitright 		" open new split panes to right and below
+set splitbelow
+set encoding=utf-8 " Set internal encoding of vim, not needed on neovim
+set hidden " TextEdit might fail if hidden is not set.
+set nobackup " Some servers have issues with backup files, see #649.
+set nowritebackup
+set cmdheight=2 " Give more space for displaying messages.
+set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+set shortmess+=c " Don't pass messages to 'ins-completion-menu'.
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  set signcolumn=number " Recently vim can merge signcolumn and number column into one
+else
+  set signcolumn=yes
+endif
 
 if (has("termguicolors"))
  set termguicolors
@@ -29,30 +74,26 @@ endif
 syntax enable
 colorscheme dracula
 
+" NERDTree configutration
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " Toggle NERDTree
 nnoremap <c-t> :NERDTreeToggle<CR>
 
-" open new split panes to right and below
-set splitright
-set splitbelow
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+n
 function! OpenTerminal()
-  split term://bash
-  resize 10
+  vsplit term://bash
+ " resize 10
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
-
 
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
@@ -70,36 +111,6 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-set encoding=utf-8
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
