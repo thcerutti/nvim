@@ -2,7 +2,10 @@ call plug#begin("~/.vim/plugged")
  Plug 'dracula/vim'
  Plug 'scrooloose/nerdtree'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
- let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-cssmodules', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-angular',  'coc-git', 'coc-highlight', 'coc-omnisharp', 'coc-snippets' ]
+ let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-cssmodules', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-angular',  'coc-git', 'coc-highlight', 'coc-snippets' ]
+ Plug 'OmniSharp/omnisharp-vim'
+ Plug 'puremourning/vimspector'
+ Plug 'dense-analysis/ale'
  Plug 'leafgarland/typescript-vim'
  Plug 'github/copilot.vim'
  Plug 'vim-airline/vim-airline'
@@ -46,7 +49,7 @@ colorscheme dracula
 set number          " Line numbers
 set mouse=a
 set t_Co=256        " Support 256 colors
-set tabstop=2       " Insert 2 spaces for a tab
+" set tabstop=2       " Insert 2 spaces for a tab
 set updatetime=300  " Faster completion
 set timeoutlen=500  " By default timeoutlen is 1000 ms
 set splitright 		  " open new split panes to right and below
@@ -58,6 +61,22 @@ set nowritebackup
 set cmdheight=2     " Give more space for displaying messages.
 set updatetime=300  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set shortmess+=c    " Don't pass messages to 'ins-completion-menu'.
+" tab configuration
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " number of spaces to use for autoindent
+set expandtab       " tabs are space
+set autoindent
+set copyindent      " copy indent from the previous line
+
+" OmniSharp key bindings
+nnoremap <silent> <C-p><C-d> :OmniSharpPreviewDefinition<CR>
+nnoremap <silent> <C-p><C-a> :OmniSharpGetCodeActions<CR>
+nnoremap <silent> <C-p><C-g> :OmniSharpGotoDefinition<CR>
+
+" GitHub Copilot
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
 " NERDTree configutration
 let g:NERDTreeShowHidden = 1
@@ -75,7 +94,7 @@ tnoremap <Esc> <C-\><C-n>
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+n
 function! OpenTerminal()
-  vsplit term://bash
+  split term://bash
  " resize 10
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
