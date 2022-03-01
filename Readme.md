@@ -1,3 +1,7 @@
+# My plugins and custom key bindings
+
+Plugin manager in use is [Vim PLug](https://github.com/junegunn/vim-plug).
+
 ## OmniSharp
 
 - `Ctrl + P, Ctrl + d`: Preview definition
