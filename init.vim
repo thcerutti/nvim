@@ -4,10 +4,13 @@ call plug#begin("~/.vim/plugged")
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-cssmodules', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-angular',  'coc-git', 'coc-highlight', 'coc-snippets' ]
  Plug 'OmniSharp/omnisharp-vim'
+ Plug 'tpope/vim-fugitive'
  Plug 'puremourning/vimspector'
  Plug 'dense-analysis/ale'
  Plug 'leafgarland/typescript-vim'
  Plug 'github/copilot.vim'
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+ Plug 'junegunn/fzf.vim'
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
  Plug 'ryanoasis/vim-devicons'
@@ -18,7 +21,7 @@ let g:airline_theme='dracula'
 let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#coc#enabled = 1
@@ -27,6 +30,8 @@ let airline#extensions#coc#warning_symbol = 'W:'
 let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#fzf#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:vimspector_enable_mappings = 'HUMAN'
 
 " Configure Airline Symbols
 if !exists('g:airline_symbols')
@@ -47,9 +52,8 @@ let g:airline_symbols.dirty='⚡'
 syntax enable
 colorscheme dracula
 set number          " Line numbers
-set mouse=a
+set mouse+=a
 set t_Co=256        " Support 256 colors
-" set tabstop=2       " Insert 2 spaces for a tab
 set updatetime=300  " Faster completion
 set timeoutlen=500  " By default timeoutlen is 1000 ms
 set splitright 		  " open new split panes to right and below
@@ -61,6 +65,7 @@ set nowritebackup
 set cmdheight=2     " Give more space for displaying messages.
 set updatetime=300  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set shortmess+=c    " Don't pass messages to 'ins-completion-menu'.
+
 " tab configuration
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
@@ -73,6 +78,8 @@ set copyindent      " copy indent from the previous line
 nnoremap <silent> <C-p><C-d> :OmniSharpPreviewDefinition<CR>
 nnoremap <silent> <C-p><C-a> :OmniSharpGetCodeActions<CR>
 nnoremap <silent> <C-p><C-g> :OmniSharpGotoDefinition<CR>
+nnoremap <silent> <C-p><C-r> :OmniSharpRename<CR>
+nnoremap <silent> <C-p><C-i> :OmniSharpFindImplementations<CR>
 
 " GitHub Copilot
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -83,10 +90,8 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle NERDTree
-nnoremap <c-t> :NERDTreeToggle<CR>
+nnoremap <c-t> :NERDTreeToggle<CR> 
 
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
@@ -98,6 +103,17 @@ function! OpenTerminal()
  " resize 10
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
+
+" ---[FZF key mapping]---
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+nnoremap <A-g> :GFiles<CR>
+nnoremap <A-o> :Files<CR>
+" ---[FZF key mapping]---
+
+" ---[Vimspector key mapping]---
+nnoremap <silent> <C-v><C-r> :VimspectorReset<CR>
+" ---[Vimspector key mapping]---
 
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
@@ -121,20 +137,6 @@ endif
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" Buffers key bidings
+nnoremap <A-,> :bprevious<CR>
+nnoremap <A-.> :bnext<CR>

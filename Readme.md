@@ -1,6 +1,6 @@
 # My plugins and custom key bindings
 
-Plugin manager in use is [Vim PLug](https://github.com/junegunn/vim-plug).
+Plugin manager in use is [Vim Plug](https://github.com/junegunn/vim-plug).
 
 ## OmniSharp
 
