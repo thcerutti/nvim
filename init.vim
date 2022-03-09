@@ -113,6 +113,11 @@ nnoremap <A-o> :Files<CR>
 
 " ---[Vimspector key mapping]---
 nnoremap <silent> <C-v><C-r> :VimspectorReset<CR>
+nmap <c-y> <Plug>VimspectorStepOver
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
 " ---[Vimspector key mapping]---
 
 " use alt+hjkl to move between split/vsplit panels
