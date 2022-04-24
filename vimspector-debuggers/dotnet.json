@@ -5,7 +5,7 @@
       "filetypes": [ "cs", "fsharp", "vbnet" ],
       "configuration": {
         "request": "launch",
-        "program": "${workspaceRoot}/bin/Debug/netcoreapp2.2/csharp.dll",
+        "program": "${workspaceRoot}/bin/Debug/net6.0/my-app-name.dll",
         "args": [],
         "stopAtEntry": true,
         "cwd": "${workspaceRoot}",

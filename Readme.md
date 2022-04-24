@@ -45,7 +45,7 @@ Plugin manager in use is [Vim Plug](https://github.com/junegunn/vim-plug).
 ## Vimspector
 
 - `Alt + v, Alt + r`: reset Vimspector
-- `Alt + v, Alt + j`: create debugger default json, changes needed in path
+- `Alt + v, Alt + j`: create default dotnet debugger json, changes needed in path
 
 ## Buffer operations
 
