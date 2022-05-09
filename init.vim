@@ -65,6 +65,7 @@ set nowritebackup
 set cmdheight=2     " Give more space for displaying messages.
 set updatetime=300  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set shortmess+=c    " Don't pass messages to 'ins-completion-menu'.
+set clipboard=unnamedplus   " set clipboard provider
 
 " tab configuration
 set tabstop=4       " number of visual spaces per TAB
