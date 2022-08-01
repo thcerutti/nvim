@@ -2,13 +2,10 @@ call plug#begin("~/.vim/plugged")
  Plug 'dracula/vim'
  Plug 'scrooloose/nerdtree'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
- let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-cssmodules', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-angular',  'coc-git', 'coc-highlight', 'coc-snippets' ]
- Plug 'OmniSharp/omnisharp-vim'
+ let g:coc_global_extensions = ['coc-emmet', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-git', 'coc-highlight', 'coc-snippets' ]
  Plug 'tpope/vim-fugitive'
  Plug 'puremourning/vimspector'
  Plug 'dense-analysis/ale'
- Plug 'leafgarland/typescript-vim'
- Plug 'github/copilot.vim'
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
  Plug 'vim-airline/vim-airline'
@@ -75,23 +72,11 @@ set expandtab       " tabs are space
 set autoindent
 set copyindent      " copy indent from the previous line
 
-" OmniSharp key bindings
-nnoremap <silent> <C-p><C-d> :OmniSharpPreviewDefinition<CR>
-nnoremap <silent> <C-p><C-a> :OmniSharpGetCodeActions<CR>
-nnoremap <silent> <C-p><C-g> :OmniSharpGotoDefinition<CR>
-nnoremap <silent> <C-p><C-r> :OmniSharpRename<CR>
-nnoremap <silent> <C-p><C-i> :OmniSharpFindImplementations<CR>
-
-" GitHub Copilot
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-
 " NERDTree configutration
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-" Toggle NERDTree
 nnoremap <c-t> :NERDTreeToggle<CR> 
 
 " turn terminal to normal mode with escape
@@ -118,11 +103,6 @@ nnoremap <silent> <A-v><A-r> :VimspectorReset<CR>
 nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
-
-function CreateSampleDotnetDebuggerFile()
-    terminal cp ~/.config/nvim/vimspector-debuggers/dotnet.json .vimspector.json
-endfunction
-nnoremap <A-v><A-j> :call CreateSampleDotnetDebuggerFile()<CR>
 " ---[Vimspector key mapping]---
 
 " use alt+hjkl to move between split/vsplit panels

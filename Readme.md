@@ -2,17 +2,6 @@
 
 Plugin manager in use is [Vim Plug](https://github.com/junegunn/vim-plug).
 
-## OmniSharp
-
-- `Ctrl + p, Ctrl + d`: Preview definition
-- `Ctrl + p, Ctrl + a`: Get code actions
-- `Ctrl + p, Ctrl + g`: Go to definition
-- `Ctrl + p, Ctrl + r`: Rename
-- `Ctrl + p, Ctrl + i`: Find implementation
-
-## GitHub Copilot
-- `Ctrl + j`: Accept suggestion
-
 ## NERD Tree
 
 - `Ctrl + t`: Toggle sidebar
