@@ -4,7 +4,6 @@ call plug#begin("~/.vim/plugged")
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  let g:coc_global_extensions = ['coc-emmet', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-git', 'coc-highlight', 'coc-snippets' ]
  Plug 'tpope/vim-fugitive'
- Plug 'puremourning/vimspector'
  Plug 'dense-analysis/ale'
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
@@ -28,7 +27,6 @@ let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#fzf#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_airline_tabline = 1
-let g:vimspector_enable_mappings = 'HUMAN'
 
 " Configure Airline Symbols
 if !exists('g:airline_symbols')
