@@ -5,6 +5,8 @@ call plug#begin("~/.vim/plugged")
  let g:coc_global_extensions = ['coc-emmet', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-git', 'coc-highlight', 'coc-snippets' ]
  Plug 'tpope/vim-fugitive'
  Plug 'dense-analysis/ale'
+ Plug 'sheerun/vim-polyglot'
+ Plug 'ludovicchabant/vim-gutentags'
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
  Plug 'vim-airline/vim-airline'
@@ -42,6 +44,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = ' | '
 let g:airline_symbols.dirty='⚡'
+let g:airline#extensions#gutentags#enabled = 1
 
 " General settings
 syntax enable
@@ -63,9 +66,9 @@ set shortmess+=c    " Don't pass messages to 'ins-completion-menu'.
 set clipboard=unnamedplus   " set clipboard provider
 
 " tab configuration
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent      " copy indent from the previous line
@@ -128,3 +131,12 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Buffers key bidings
 nnoremap <A-,> :bprevious<CR>
 nnoremap <A-.> :bnext<CR>
+
+" auto-close symbols
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
