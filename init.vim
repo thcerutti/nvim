@@ -6,7 +6,6 @@ call plug#begin("~/.vim/plugged")
  Plug 'tpope/vim-fugitive'
  Plug 'dense-analysis/ale'
  Plug 'sheerun/vim-polyglot'
- Plug 'ludovicchabant/vim-gutentags'
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
  Plug 'vim-airline/vim-airline'
@@ -131,12 +130,3 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Buffers key bidings
 nnoremap <A-,> :bprevious<CR>
 nnoremap <A-.> :bnext<CR>
-
-" auto-close symbols
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
