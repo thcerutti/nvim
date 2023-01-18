@@ -1,6 +1,12 @@
 # My plugins and custom key bindings
 
-Plugin manager in use is [Vim Plug](https://github.com/junegunn/vim-plug).
+These are my configs to Neovim editor.
+
+## Instalation
+
+- Clone this repo to `~/.config/` path
+- Run the script `./install-vim-plug.sh` to install the [Vim Plug](https://github.com/junegunn/vim-plug)
+- On `neovim` editor run `:PlugInstall` to download and install the plugins
 
 ## NERD Tree
 
