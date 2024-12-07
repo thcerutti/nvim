@@ -11,6 +11,7 @@ These are my configs to Neovim editor.
 ## NERD Tree
 
 - `Ctrl + t`: Toggle sidebar
+- `Ctrl + m`: Open menu
 
 ## Terminal
 
