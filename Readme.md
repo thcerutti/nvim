@@ -30,7 +30,8 @@ These are my configs to Neovim editor.
 
 ## General bidings
 
-- `gg=G`: Indent current file
+- `Ctrl + s`: Save the current file in normal, insert, and visual modes.
+- `gg=G`: Indent the entire file.
 
 ## ZFZ
 
